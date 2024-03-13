@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nelsonjunior.clienteEmpresa.models.Cliente;
-import com.nelsonjunior.clienteEmpresa.models.Empresa;
 import com.nelsonjunior.clienteEmpresa.repositories.ClienteRepository;
 
 @Service
@@ -14,10 +13,6 @@ public class ClienteService {
     
     @Autowired
     private ClienteRepository clienteRepository;
-
-    @Autowired
-    private EmpresaService empresaService;
-
 
     //Encontrar por ID --> GET
     public Cliente findById(Long id){  
@@ -27,9 +22,7 @@ public class ClienteService {
 
     //Cadastrar cliente --> POST
     public Cliente create(Cliente cliente){
-        Empresa empresa = this.empresaService.findById(cliente.getEmpresa().getId());
         cliente.setId(null);
-        cliente.setEmpresa(empresa);
         cliente = this.clienteRepository.save(cliente);
         return cliente;
     }

@@ -33,8 +33,7 @@ public abstract class Cliente {
     private boolean ativo; 
 
     @ManyToOne
-    @JoinColumn(name = "empresa_id")
+    @JoinColumn(name = "empresa_id") 
     private Empresa empresa;
-    
 
 }

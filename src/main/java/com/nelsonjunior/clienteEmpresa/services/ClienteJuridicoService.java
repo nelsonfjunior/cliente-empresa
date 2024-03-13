@@ -29,5 +29,6 @@ public class ClienteJuridicoService {
         clienteJuridico.setId(id);
         clienteJuridicoRepository.save(clienteJuridico);
     }
+
     
 }

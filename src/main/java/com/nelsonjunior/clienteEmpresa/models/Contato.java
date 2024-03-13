@@ -4,24 +4,34 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+@Entity
+@Table(name = "contato")
 @Getter
 @Setter
-@Entity
-@Table(name = "empresa")
-public class Empresa {
-    
+public class Contato {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    
     @NotEmpty
-    private String nome;
+    private String descricao;
 
-    private boolean ativo;
+    @NotNull
+    private Long numero;
+
+    private boolean ativo = true;
+
+    @ManyToOne
+    @JoinColumn(name = "clienteJuridico_id")
+    private ClienteJuridico clienteJuridico;
 
 }

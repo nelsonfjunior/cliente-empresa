@@ -24,26 +24,26 @@ public class ContatoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Contato> findById(@PathVariable Long id){
-        Contato cliente = this.contatoService.findById(id);
+        Contato cliente = this.contatoService.getContatoById(id);
         return ResponseEntity.ok().body(cliente);
     }
 
     @PostMapping
     public ResponseEntity<Contato> create(@RequestBody Contato contato){
-        Contato contatoCriado = this.contatoService.create(contato);
+        Contato contatoCriado = this.contatoService.createContato(contato);
         return ResponseEntity.status(HttpStatus.CREATED).body(contatoCriado);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@RequestBody Contato contato, @PathVariable Long id){
         contato.setId(id);
-        this.contatoService.update(contato);
+        this.contatoService.updateContato(contato);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
-        this.contatoService.delete(id);
+        this.contatoService.deleteContato(id);
         return ResponseEntity.noContent().build();
     }
 

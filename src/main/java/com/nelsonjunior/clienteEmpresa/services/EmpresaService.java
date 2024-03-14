@@ -16,29 +16,29 @@ public class EmpresaService {
 
 
     //Encontrar por ID --> GET
-    public Empresa findById(Long id){  
+    public Empresa getEmpresaById(Long id){  
         Optional<Empresa> empresa = empresaRepository.findById(id);
         return empresa.orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
     }
 
     //Cadastrar Empresa --> POST
-    public Empresa create(Empresa empresa){
+    public Empresa createEmpresa(Empresa empresa){
         empresa.setId(null);
         empresa = this.empresaRepository.save(empresa);
         return empresa;
     }
 
     //Atualizar Empresa --> PUT
-    public Empresa update(Empresa empresa){
-        Empresa empresa2 = findById(empresa.getId());
+    public Empresa updateEmpresa(Empresa empresa){
+        Empresa empresa2 = getEmpresaById(empresa.getId());
         empresa2.setAtivo(empresa.isAtivo());
         return this.empresaRepository.save(empresa2);
     }
 
     //Deletar Empresa --> DELETE
-    public void delete(Long id){
+    public void deleteEmpresa(Long id){
         try {
-            findById(id);
+            getEmpresaById(id);
             this.empresaRepository.deleteById(id);
         } catch (Exception e) {
             throw new RuntimeException("Não é possível excluir!");

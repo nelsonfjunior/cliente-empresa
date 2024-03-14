@@ -18,26 +18,26 @@ public class ContatoService {
     ClienteJuridicoService clienteJuridicoService; 
 
     //Encontrar por ID --> GET
-    public Contato findById(Long id){  
+    public Contato getContatoById(Long id){  
         Optional<Contato> contato = contatoRepository.findById(id);
         return contato.orElseThrow(() -> new RuntimeException("Contato não encontrado"));
     }
 
     //Cadastrar Contato --> POST
-    public Contato create(Contato contato){
+    public Contato createContato(Contato contato){
         contato.setId(null);
         return this.contatoRepository.save(contato);
     }
 
     //Atualizar contato --> PUT
-    public Contato update(Contato contato){
-        Contato contatoNovo = findById(contato.getId());
+    public Contato updateContato(Contato contato){
+        Contato contatoNovo = getContatoById(contato.getId());
         return this.contatoRepository.save(contatoNovo);
     }
 
     // Deletar contato --> DELETE
-    public void delete(Long id){ 
-        findById(id);
+    public void deleteContato(Long id){ 
+        getContatoById(id);
         try {
             this.contatoRepository.deleteById(id);
         } catch (Exception e) {

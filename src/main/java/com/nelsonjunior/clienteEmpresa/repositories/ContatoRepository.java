@@ -7,5 +7,5 @@ import com.nelsonjunior.clienteEmpresa.models.Contato;
 
 @Repository
 public interface ContatoRepository extends JpaRepository<Contato, Long>{
-    
+
 }

@@ -37,12 +37,9 @@ public class ContatoService {
 
     // Deletar contato --> DELETE
     public void deleteContato(Long id){ 
-        getContatoById(id);
-        try {
-            this.contatoRepository.deleteById(id);
-        } catch (Exception e) {
-            throw new RuntimeException("Não é possível excluir");
-        }
+        Contato contato = getContatoById(id);
+        clienteJuridicoService.removeContatoFromClientes(contato);
+        this.contatoRepository.deleteById(id);
     }
 
 }

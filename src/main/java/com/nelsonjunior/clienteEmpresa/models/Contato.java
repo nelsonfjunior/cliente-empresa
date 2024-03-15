@@ -26,6 +26,6 @@ public class Contato {
     @NotNull
     private Long numero;
 
-    private boolean ativo = true;
+    private boolean ativo;
 
 }

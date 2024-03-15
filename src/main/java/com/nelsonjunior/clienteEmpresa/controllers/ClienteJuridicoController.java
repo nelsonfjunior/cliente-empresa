@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nelsonjunior.clienteEmpresa.dto.ClienteJuridicoDto;
 import com.nelsonjunior.clienteEmpresa.models.ClienteJuridico;
 import com.nelsonjunior.clienteEmpresa.services.ClienteJuridicoService;
 
@@ -24,14 +25,14 @@ public class ClienteJuridicoController {
     
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClienteJuridico> getClienteJuridicoById(@PathVariable Long id) {
-        ClienteJuridico clienteJuridico = clienteJuridicoService.getClienteJuridicoById(id);
+    public ResponseEntity<ClienteJuridicoDto> getClienteJuridicoById(@PathVariable Long id) {
+        ClienteJuridicoDto clienteJuridico = clienteJuridicoService.getClienteJuridicoById(id);
         return ResponseEntity.ok().body(clienteJuridico);
     }
 
     @PostMapping
-    public ResponseEntity<ClienteJuridico> createClienteJuridico(@RequestBody ClienteJuridico clienteJuridico) {
-        ClienteJuridico clienteJuridicoCriado = clienteJuridicoService.createClienteJuridico(clienteJuridico);
+    public ResponseEntity<ClienteJuridicoDto> createClienteJuridico(@RequestBody ClienteJuridico clienteJuridico) {
+        ClienteJuridicoDto clienteJuridicoCriado = clienteJuridicoService.createClienteJuridico(clienteJuridico);
         return ResponseEntity.status(HttpStatus.CREATED).body(clienteJuridicoCriado);
     }
 

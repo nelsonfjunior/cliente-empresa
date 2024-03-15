@@ -1,7 +1,5 @@
 package com.nelsonjunior.clienteEmpresa.services;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +19,11 @@ public class ClienteFisicoService {
         return dto;
     }
 
-    public ClienteFisico createClienteFisico(ClienteFisico clienteFisico) {
-        return clienteFisicoRepository.save(clienteFisico);
+    public ClienteFisicoDto createClienteFisico(ClienteFisico clienteFisico) {
+        clienteFisico.setId(null);
+        ClienteFisico cFisico = this.clienteFisicoRepository.save(clienteFisico);
+        ClienteFisicoDto dto = new ClienteFisicoDto(cFisico); 
+        return dto;
     }
 
     public void deleteClienteFisico(Long id) {

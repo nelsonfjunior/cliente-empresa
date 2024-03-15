@@ -3,6 +3,7 @@ package com.nelsonjunior.clienteEmpresa.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.nelsonjunior.clienteEmpresa.dto.ClienteJuridicoDto;
 import com.nelsonjunior.clienteEmpresa.models.ClienteJuridico;
 import com.nelsonjunior.clienteEmpresa.models.Contato;
 import com.nelsonjunior.clienteEmpresa.repositories.ClienteJuridicoRepository;
@@ -14,13 +15,17 @@ public class ClienteJuridicoService {
     private ClienteJuridicoRepository clienteJuridicoRepository;
 
 
-    public ClienteJuridico getClienteJuridicoById(Long id) {
-        return clienteJuridicoRepository.findById(id).orElse(null);
+    public ClienteJuridicoDto getClienteJuridicoById(Long id) {
+        ClienteJuridico clienteJuridico = clienteJuridicoRepository.findById(id).orElse(null);
+        ClienteJuridicoDto dto = new ClienteJuridicoDto(clienteJuridico);
+        return dto;
     }
 
-    public ClienteJuridico createClienteJuridico(ClienteJuridico clienteJuridico) {
+    public ClienteJuridicoDto createClienteJuridico(ClienteJuridico clienteJuridico) {
         clienteJuridico.setId(null);
-        return this.clienteJuridicoRepository.save(clienteJuridico);
+        ClienteJuridico cJuridico = this.clienteJuridicoRepository.save(clienteJuridico);
+        ClienteJuridicoDto dto = new ClienteJuridicoDto(cJuridico);
+        return dto;
     } 
 
     public void deleteClienteJuridico(Long id) {
@@ -43,7 +48,7 @@ public class ClienteJuridicoService {
             }
         }
 
-        clienteJuridicoRepository.save(clienteExistente);
+        this.clienteJuridicoRepository.save(clienteExistente);
     }
 
     public void removeContatoFromClientes(Contato contato) {

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nelsonjunior.clienteEmpresa.dto.ContatoDto;
 import com.nelsonjunior.clienteEmpresa.models.Contato;
 import com.nelsonjunior.clienteEmpresa.services.ContatoService;
 
@@ -23,14 +24,14 @@ public class ContatoController {
     private ContatoService contatoService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Contato> findById(@PathVariable Long id){
-        Contato cliente = this.contatoService.getContatoById(id);
+    public ResponseEntity<ContatoDto> findById(@PathVariable Long id){
+        ContatoDto cliente = this.contatoService.getContatoById(id);
         return ResponseEntity.ok().body(cliente);
     }
 
     @PostMapping
-    public ResponseEntity<Contato> create(@RequestBody Contato contato){
-        Contato contatoCriado = this.contatoService.createContato(contato);
+    public ResponseEntity<ContatoDto> create(@RequestBody Contato contato){
+        ContatoDto contatoCriado = this.contatoService.createContato(contato);
         return ResponseEntity.status(HttpStatus.CREATED).body(contatoCriado);
     }
 
@@ -46,6 +47,7 @@ public class ContatoController {
         this.contatoService.deleteContato(id);
         return ResponseEntity.noContent().build();
     }
+    
 
     
 }

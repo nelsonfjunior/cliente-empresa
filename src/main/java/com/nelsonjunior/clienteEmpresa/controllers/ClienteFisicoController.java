@@ -30,8 +30,8 @@ public class ClienteFisicoController {
     }
 
     @PostMapping
-    public ResponseEntity<ClienteFisico> createClienteFisico(@RequestBody ClienteFisico clienteFisico) {
-        ClienteFisico clienteFisicoCriado = clienteFisicoService.createClienteFisico(clienteFisico);
+    public ResponseEntity<ClienteFisicoDto> createClienteFisico(@RequestBody ClienteFisico clienteFisico) {
+        ClienteFisicoDto clienteFisicoCriado = clienteFisicoService.createClienteFisico(clienteFisico);
         return ResponseEntity.status(HttpStatus.CREATED).body(clienteFisicoCriado);
     }
 

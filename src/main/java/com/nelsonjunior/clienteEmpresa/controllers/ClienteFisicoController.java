@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nelsonjunior.clienteEmpresa.dto.ClienteFisicoDto;
 import com.nelsonjunior.clienteEmpresa.models.ClienteFisico;
 import com.nelsonjunior.clienteEmpresa.services.ClienteFisicoService;
 
@@ -23,8 +24,8 @@ public class ClienteFisicoController {
     private ClienteFisicoService clienteFisicoService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClienteFisico> getClienteFisicoById(@PathVariable Long id) {
-        ClienteFisico clienteFisico = clienteFisicoService.getClienteFisicoById(id);
+    public ResponseEntity<ClienteFisicoDto> getClienteFisicoById(@PathVariable Long id) {
+        ClienteFisicoDto clienteFisico = clienteFisicoService.getClienteFisicoById(id);
         return ResponseEntity.ok().body(clienteFisico);
     }
 

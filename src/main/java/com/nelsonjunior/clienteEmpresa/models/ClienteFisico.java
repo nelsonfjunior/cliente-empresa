@@ -27,5 +27,4 @@ public class ClienteFisico extends Cliente{
 
     private long numero;
 
-
 }

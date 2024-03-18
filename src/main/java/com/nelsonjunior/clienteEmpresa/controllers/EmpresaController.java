@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nelsonjunior.clienteEmpresa.dto.EmpresaDto;
 import com.nelsonjunior.clienteEmpresa.models.Empresa;
 import com.nelsonjunior.clienteEmpresa.services.EmpresaService;
 
@@ -23,21 +24,20 @@ public class EmpresaController {
     private EmpresaService empresaService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Empresa> findById(@PathVariable Long id){
-        Empresa empresa = this.empresaService.getEmpresaById(id);
+    public ResponseEntity<EmpresaDto> findById(@PathVariable Long id){
+        EmpresaDto empresa = this.empresaService.getEmpresaById(id);
         return ResponseEntity.ok().body(empresa);
     }
 
     @PostMapping
-    public ResponseEntity<Empresa> create(@RequestBody Empresa empresa){
-        Empresa empresaCriada = this.empresaService.createEmpresa(empresa);
+    public ResponseEntity<EmpresaDto> create(@RequestBody Empresa empresa){
+        EmpresaDto empresaCriada = this.empresaService.createEmpresa(empresa);
         return ResponseEntity.status(HttpStatus.CREATED).body(empresaCriada);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@RequestBody Empresa empresa, @PathVariable Long id){
-        empresa.setId(id);
-        this.empresaService.updateEmpresa(empresa);
+        this.empresaService.updateEmpresa(id, empresa);
         return ResponseEntity.noContent().build();
     }
 

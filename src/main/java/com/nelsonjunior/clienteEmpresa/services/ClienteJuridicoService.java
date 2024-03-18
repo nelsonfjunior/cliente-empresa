@@ -1,5 +1,8 @@
 package com.nelsonjunior.clienteEmpresa.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +24,26 @@ public class ClienteJuridicoService {
         return dto;
     }
 
+    public List<ClienteJuridicoDto> getAllClienteJuridico(){
+        List<ClienteJuridico> clientesJuridicos = clienteJuridicoRepository.findAllByContatos_Ativo(true);
+
+        List<ClienteJuridicoDto> clientesJuridicosDto = new ArrayList<ClienteJuridicoDto>();
+        for (ClienteJuridico clienteJuridico : clientesJuridicos) {
+            ClienteJuridicoDto clienteJuriditoDto = new ClienteJuridicoDto(clienteJuridico);
+            clientesJuridicosDto.add(clienteJuriditoDto);
+        }
+
+        return clientesJuridicosDto;
+        
+    }
+
     public ClienteJuridicoDto createClienteJuridico(ClienteJuridico clienteJuridico) {
         clienteJuridico.setId(null);
+        for(Contato contato : clienteJuridico.getContatos()){
+            contato.setAtivo(true);
+            
+        }
+
         ClienteJuridico cJuridico = this.clienteJuridicoRepository.save(clienteJuridico);
         ClienteJuridicoDto dto = new ClienteJuridicoDto(cJuridico);
         return dto;
@@ -45,6 +66,7 @@ public class ClienteJuridicoService {
 
             for (Contato contato : clienteExistente.getContatos()) {
                 contato.setAtivo(clienteJuridico.isAtivo());
+                clienteExistente.getContatos().add(contato);
             }
         }
 

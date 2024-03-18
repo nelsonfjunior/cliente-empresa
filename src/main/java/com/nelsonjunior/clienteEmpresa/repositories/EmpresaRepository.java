@@ -7,5 +7,4 @@ import com.nelsonjunior.clienteEmpresa.models.Empresa;
 
 @Repository
 public interface EmpresaRepository extends JpaRepository<Empresa, Long>{
-    
 }

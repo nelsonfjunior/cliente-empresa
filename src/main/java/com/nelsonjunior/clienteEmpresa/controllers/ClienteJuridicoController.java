@@ -1,5 +1,7 @@
 package com.nelsonjunior.clienteEmpresa.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +30,12 @@ public class ClienteJuridicoController {
     public ResponseEntity<ClienteJuridicoDto> getClienteJuridicoById(@PathVariable Long id) {
         ClienteJuridicoDto clienteJuridico = clienteJuridicoService.getClienteJuridicoById(id);
         return ResponseEntity.ok().body(clienteJuridico);
+    }
+
+    @GetMapping("/contato-ativo")
+    public ResponseEntity<List<ClienteJuridicoDto>> getAllClienteJuridico(){
+        List<ClienteJuridicoDto> clientesJuridicos = clienteJuridicoService.getAllClienteJuridico();
+        return ResponseEntity.ok().body(clientesJuridicos);
     }
 
     @PostMapping

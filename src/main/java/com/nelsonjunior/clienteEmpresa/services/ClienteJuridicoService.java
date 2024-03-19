@@ -41,7 +41,6 @@ public class ClienteJuridicoService {
         clienteJuridico.setId(null);
         for(Contato contato : clienteJuridico.getContatos()){
             contato.setAtivo(true);
-            
         }
 
         ClienteJuridico cJuridico = this.clienteJuridicoRepository.save(clienteJuridico);
@@ -59,17 +58,22 @@ public class ClienteJuridicoService {
     }
 
     public void updateClienteJuridico(Long id, ClienteJuridico clienteJuridico) {
-        ClienteJuridico clienteExistente = clienteJuridicoRepository.findById(id).orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+        ClienteJuridico clienteExistente = clienteJuridicoRepository.findById(id).orElseThrow(() -> new RuntimeException("Cliente Jurídico não encontrado"));
 
         if (clienteJuridico.isAtivo() != clienteExistente.isAtivo()) {
-            clienteExistente.setAtivo(clienteJuridico.isAtivo());
-
             for (Contato contato : clienteExistente.getContatos()) {
                 contato.setAtivo(clienteJuridico.isAtivo());
-                clienteExistente.getContatos().add(contato);
             }
         }
-
+        clienteExistente.setId(id);
+        clienteExistente.setNome(clienteJuridico.getNome());
+        clienteExistente.setDataNasc(clienteJuridico.getDataNasc());
+        clienteExistente.setAtivo(clienteJuridico.isAtivo());
+        clienteExistente.setContatos(clienteJuridico.getContatos());
+        clienteExistente.setCnpj(clienteJuridico.getCnpj());
+        clienteExistente.setEmpresa(clienteJuridico.getEmpresa());
+        clienteExistente.setIe(clienteJuridico.getIe());
+        
         this.clienteJuridicoRepository.save(clienteExistente);
     }
 

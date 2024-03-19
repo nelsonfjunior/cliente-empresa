@@ -30,8 +30,13 @@ public class EmpresaService {
 
     //Atualizar Empresa --> PUT
     public void updateEmpresa(Long id, Empresa empresa){
-        empresa.setId(id);
-        empresaRepository.save(empresa);
+        Empresa empresaNovo = empresaRepository.findById(id).orElseThrow(() -> new RuntimeException("Empresa não encontrada"));
+
+        empresaNovo.setId(id);
+        empresaNovo.setAtivo(empresa.isAtivo());
+        empresaNovo.setNome(empresa.getNome());
+
+        this.empresaRepository.save(empresa);
     }
 
     //Deletar Empresa --> DELETE

@@ -33,8 +33,14 @@ public class ContatoService {
     }
 
     //Atualizar contato --> PUT
-    public void updateContato(Contato contato){
-        Contato contatoNovo = contatoRepository.findById(contato.getId()).orElse(null);
+    public void updateContato(Long id, Contato contato){
+        Contato contatoNovo = contatoRepository.findById(id).orElseThrow(() -> new RuntimeException("Contato não encontrado"));
+
+        contatoNovo.setDescricao(contato.getDescricao());
+        contatoNovo.setId(id);
+        contatoNovo.setAtivo(contato.isAtivo());
+        contatoNovo.setNumero(contato.getNumero());
+
         this.contatoRepository.save(contatoNovo);
     }
 

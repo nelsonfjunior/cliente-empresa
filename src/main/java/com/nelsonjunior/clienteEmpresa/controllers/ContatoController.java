@@ -38,7 +38,7 @@ public class ContatoController {
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@RequestBody Contato contato, @PathVariable Long id){
         contato.setId(id);
-        this.contatoService.updateContato(contato);
+        this.contatoService.updateContato(id, contato);
         return ResponseEntity.noContent().build();
     }
 

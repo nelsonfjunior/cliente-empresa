@@ -31,8 +31,20 @@ public class ClienteFisicoService {
     }
 
     public void updateClienteFisico(Long id, ClienteFisico clienteFisico) {
-        clienteFisico.setId(id);
-        clienteFisicoRepository.save(clienteFisico);
+        ClienteFisico clienteNovo = clienteFisicoRepository.findById(id).orElseThrow(() -> new RuntimeException("Cliente Físico não encontrado"));
+
+        clienteNovo.setId(id);
+        clienteNovo.setAtivo(clienteFisico.isAtivo());
+        clienteNovo.setBairro(clienteFisico.getBairro());
+        clienteNovo.setCidade(clienteFisico.getCidade());
+        clienteNovo.setCpf(clienteFisico.getCpf());
+        clienteNovo.setDataNasc(clienteFisico.getDataNasc());
+        clienteNovo.setEmpresa(clienteFisico.getEmpresa());
+        clienteNovo.setNome(clienteFisico.getNome());
+        clienteNovo.setNumero(clienteFisico.getNumero());
+        clienteNovo.setUf(clienteFisico.getUf());
+
+        this.clienteFisicoRepository.save(clienteFisico);
     }
 
 }

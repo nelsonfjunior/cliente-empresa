@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nelsonjunior.clienteEmpresa.dto.ClienteJuridicoDto;
+import com.nelsonjunior.clienteEmpresa.dto.ContatoDto;
 import com.nelsonjunior.clienteEmpresa.models.ClienteJuridico;
 import com.nelsonjunior.clienteEmpresa.models.Contato;
 import com.nelsonjunior.clienteEmpresa.repositories.ClienteJuridicoRepository;
@@ -24,18 +25,25 @@ public class ClienteJuridicoService {
         return dto;
     }
 
-    public List<ClienteJuridicoDto> getAllClienteJuridico(){
+    public List<ClienteJuridicoDto> getAllClienteJuridico() {
         List<ClienteJuridico> clientesJuridicos = clienteJuridicoRepository.findAllByContatos_Ativo(true);
+        List<ClienteJuridicoDto> clientesJuridicosDto = new ArrayList<>();
 
-        List<ClienteJuridicoDto> clientesJuridicosDto = new ArrayList<ClienteJuridicoDto>();
         for (ClienteJuridico clienteJuridico : clientesJuridicos) {
-            ClienteJuridicoDto clienteJuriditoDto = new ClienteJuridicoDto(clienteJuridico);
-            clientesJuridicosDto.add(clienteJuriditoDto);
+            List<ContatoDto> contatosDto = new ArrayList<>();
+            for (Contato contato : clienteJuridico.getContatos()) {
+                if (contato.isAtivo()) {
+                    ContatoDto contatoDto = new ContatoDto(contato.getNumero(), contato.getDescricao());
+                    contatosDto.add(contatoDto);
+                }
+            }
+            ClienteJuridicoDto clienteJuridicoDto = new ClienteJuridicoDto(clienteJuridico.getNome(),clienteJuridico.getCnpj(),contatosDto);
+            clientesJuridicosDto.add(clienteJuridicoDto);
         }
 
         return clientesJuridicosDto;
-        
     }
+
 
     public ClienteJuridicoDto createClienteJuridico(ClienteJuridico clienteJuridico) {
         clienteJuridico.setId(null);

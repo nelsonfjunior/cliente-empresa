@@ -44,7 +44,7 @@ public class ClienteFisicoService {
         clienteNovo.setNumero(clienteFisico.getNumero());
         clienteNovo.setUf(clienteFisico.getUf());
 
-        this.clienteFisicoRepository.save(clienteFisico);
+        this.clienteFisicoRepository.save(clienteNovo);
     }
 
 }

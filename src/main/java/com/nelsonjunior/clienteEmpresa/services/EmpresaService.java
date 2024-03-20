@@ -36,7 +36,7 @@ public class EmpresaService {
         empresaNovo.setAtivo(empresa.isAtivo());
         empresaNovo.setNome(empresa.getNome());
 
-        this.empresaRepository.save(empresa);
+        this.empresaRepository.save(empresaNovo);
     }
 
     //Deletar Empresa --> DELETE
